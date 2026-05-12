@@ -1,0 +1,67 @@
+name: Publish Python Package
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build wheels (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: PyO3/maturin-action@v1
+        with:
+          command: build
+          args: --release --features python --out dist
+          sccache: "true"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheels-${{ matrix.os }}
+          path: dist/*
+
+  sdist:
+    name: Build source distribution
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: PyO3/maturin-action@v1
+        with:
+          command: sdist
+          args: --out dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sdist
+          path: dist/*
+
+  publish:
+    name: Publish to PyPI
+    needs: [build, sdist]
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist
