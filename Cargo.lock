@@ -595,7 +595,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "goes19"
+name = "goes-abi"
 version = "0.1.0"
 dependencies = [
  "chrono",

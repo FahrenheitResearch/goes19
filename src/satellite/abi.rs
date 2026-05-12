@@ -346,8 +346,8 @@ mod tests {
     #[test]
     #[ignore]
     fn reads_real_goes_abi_fixture() {
-        let path = std::env::var_os("GOES19_ABI_FIXTURE")
-            .expect("set GOES19_ABI_FIXTURE to a GOES ABI NetCDF file");
+        let path = std::env::var_os("GOES_ABI_FIXTURE")
+            .expect("set GOES_ABI_FIXTURE to a GOES ABI NetCDF file");
         let scene = read_goes_abi_scene(PathBuf::from(path)).unwrap();
         assert_eq!(scene.fixed_grid.nx, 2500);
         assert_eq!(scene.fixed_grid.ny, 1500);

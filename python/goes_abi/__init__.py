@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from ._goes19 import (
+from ._goes_abi import (
     capabilities_json_py as _capabilities_json,
     render_native_sequence_json_py as _render_native_sequence_json,
     render_satellite_json_py as _render_satellite_json,

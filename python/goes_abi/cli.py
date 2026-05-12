@@ -9,7 +9,7 @@ from . import capabilities, render_native_sequence, render_satellite, render_web
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(prog="goes19")
+    parser = argparse.ArgumentParser(prog="goes-abi")
     sub = parser.add_subparsers(dest="command", required=True)
 
     sub.add_parser("capabilities")
@@ -111,7 +111,7 @@ def _add_common_satellite_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--label", default="GOES Native")
     parser.add_argument("--bounds", default="-127,-111,30,44.5")
     parser.add_argument("--out-dir", type=Path, required=True)
-    parser.add_argument("--cache-dir", type=Path, default=Path("goes19_cache"))
+    parser.add_argument("--cache-dir", type=Path, default=Path("goes_abi_cache"))
 
 
 def _parse_bounds(raw: str) -> tuple[float, float, float, float]:

@@ -1,4 +1,4 @@
-use _goes19::{
+use _goes_abi::{
     GoesNativeSequenceRequest, GoesSatelliteBatchRequest, GoesWebTilesRequest, PngCompressionMode,
     capabilities_json, run_goes_native_sequence, run_goes_satellite_batch, run_goes_web_tiles,
     web_tiles::GoesWebTileLayerMode,
@@ -9,7 +9,7 @@ use std::path::PathBuf;
 
 #[derive(Debug, Parser)]
 #[command(
-    name = "goes19",
+    name = "goes-abi",
     about = "Standalone GOES ABI native renderer and XYZ tile generator"
 )]
 struct Cli {
@@ -224,7 +224,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 domain_label: args.label,
                 bounds: (args.west, args.east, args.south, args.north),
                 out_dir: args.out_dir,
-                cache_dir: args.cache_dir.unwrap_or_else(_goes19::default_cache_dir),
+                cache_dir: args.cache_dir.unwrap_or_else(_goes_abi::default_cache_dir),
                 products: args.products,
                 width: args.width,
                 height: args.height,
@@ -259,7 +259,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 domain_label: args.label,
                 bounds: (args.west, args.east, args.south, args.north),
                 out_dir: args.out_dir,
-                cache_dir: args.cache_dir.unwrap_or_else(_goes19::default_cache_dir),
+                cache_dir: args.cache_dir.unwrap_or_else(_goes_abi::default_cache_dir),
                 start_time_utc: parse_optional_time(args.start.as_deref())?,
                 end_time_utc: parse_optional_time(args.end.as_deref())?,
                 latest_count: args.latest_count,

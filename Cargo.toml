@@ -1,19 +1,19 @@
 [package]
-name = "goes19"
+name = "goes-abi"
 version = "0.1.0"
 edition = "2024"
 rust-version = "1.85"
 license = "MIT"
 description = "Standalone all-Rust GOES ABI renderer, tiler, and Python package"
-repository = "https://github.com/FahrenheitResearch/goes19"
+repository = "https://github.com/FahrenheitResearch/goes-abi"
 
 [lib]
-name = "_goes19"
+name = "_goes_abi"
 crate-type = ["cdylib", "rlib"]
 
 [[bin]]
-name = "goes19"
-path = "src/bin/goes19.rs"
+name = "goes-abi"
+path = "src/bin/goes-abi.rs"
 
 [features]
 default = []

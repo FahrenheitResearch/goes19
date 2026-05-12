@@ -33,8 +33,8 @@ pub fn render_web_tiles_json(request_json: &str) -> Result<String, Box<dyn std::
 
 pub fn capabilities_json() -> String {
     serde_json::json!({
-        "package": "goes19",
-        "schema": "goes19.capabilities.v1",
+        "package": "goes-abi",
+        "schema": "goes_abi.capabilities.v1",
         "satellites": ["goes16", "goes17", "goes18", "goes19"],
         "sectors": ["conus", "full_disk", "meso1", "meso2"],
         "batch_products": [
@@ -50,15 +50,15 @@ pub fn capabilities_json() -> String {
             "day_night_cloud_micro_combo", "band_13", "C13"
         ],
         "outputs": ["native_png", "native_sequence_png", "xyz_webmercator_tiles", "json_manifest"],
-        "default_cache_dir_env": "GOES19_CACHE_DIR"
+        "default_cache_dir_env": "GOES_ABI_CACHE_DIR"
     })
     .to_string()
 }
 
 pub fn default_cache_dir() -> PathBuf {
-    std::env::var_os("GOES19_CACHE_DIR")
+    std::env::var_os("GOES_ABI_CACHE_DIR")
         .map(PathBuf::from)
-        .unwrap_or_else(|| PathBuf::from("goes19_cache"))
+        .unwrap_or_else(|| PathBuf::from("goes_abi_cache"))
 }
 
 #[cfg(feature = "python")]
@@ -92,7 +92,7 @@ mod python {
     }
 
     #[pymodule]
-    fn _goes19(module: &Bound<'_, PyModule>) -> PyResult<()> {
+    fn _goes_abi(module: &Bound<'_, PyModule>) -> PyResult<()> {
         module.add_function(wrap_pyfunction!(capabilities_json_py, module)?)?;
         module.add_function(wrap_pyfunction!(render_satellite_json_py, module)?)?;
         module.add_function(wrap_pyfunction!(render_native_sequence_json_py, module)?)?;

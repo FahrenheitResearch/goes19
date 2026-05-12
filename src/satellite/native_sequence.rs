@@ -224,7 +224,7 @@ pub fn run_goes_native_sequence(
         frames.push(frame);
     }
 
-    let report_path = run_dir.join("goes19_native_sequence_report.json");
+    let report_path = run_dir.join("goes_abi_native_sequence_report.json");
     let report = GoesNativeSequenceReport {
         ok: true,
         generated_at_utc: Utc::now(),

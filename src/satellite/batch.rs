@@ -147,7 +147,7 @@ impl GoesSatelliteProduct {
             | "natural_color"
             | "goes_natural_color_rgb" => Ok(Self::GeoColor),
             "glm_fed_geocolor" | "goes_glm_fed_geocolor" | "glm_geocolor" => Err(boxed_error(
-                "GLM-fed GeoColor is not included in standalone goes19 yet; use goes_geocolor",
+                "GLM-fed GeoColor is not included in standalone goes-abi yet; use goes_geocolor",
             )),
             "airmass" | "air_mass" | "airmass_rgb" | "goes_airmass_rgb" => Ok(Self::AirMassRgb),
             "sandwich" | "sandwich_rgb" | "goes_sandwich_rgb" => Ok(Self::SandwichRgb),
@@ -522,7 +522,7 @@ pub fn run_goes_satellite_batch(
         })
         .collect::<BTreeMap<_, _>>();
 
-    let report_path = run_dir.join("goes19_satellite_report.json");
+    let report_path = run_dir.join("goes_abi_satellite_report.json");
     let report = GoesSatelliteBatchReport {
         ok: true,
         skipped: false,
@@ -617,7 +617,7 @@ fn render_product(
             rendered_native_fixed_grid = true;
         } else {
             return Err(boxed_error(format!(
-                "standalone goes19 renders native fixed-grid ABI products; {} is not a supported native fixed-grid key",
+                "standalone goes-abi renders native fixed-grid ABI products; {} is not a supported native fixed-grid key",
                 download.object.key
             )));
         }

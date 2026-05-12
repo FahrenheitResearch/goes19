@@ -1,4 +1,4 @@
-# goes19
+# goes-abi
 
 Standalone all-Rust GOES ABI renderer, native PNG generator, XYZ tile generator, and Python package.
 
@@ -10,7 +10,7 @@ This package is for people who want the GOES satellite rendering pieces without 
 - Native fixed-grid PNG renders for ABI bands and RGB products.
 - Native crop/sequence rendering for workflow-friendly regional loops.
 - XYZ Web Mercator tile generation from local ABI channel files.
-- Python bindings through `maturin` and a `goes19` Python module.
+- Python bindings through `maturin` and a `goes_abi` Python module.
 - No `rustwx` checkout, vendored dependency tree, C NetCDF, C HDF5, or Python geospatial stack required.
 
 ## Install
@@ -18,13 +18,13 @@ This package is for people who want the GOES satellite rendering pieces without 
 Install the Rust CLI directly from GitHub:
 
 ```powershell
-cargo install --git https://github.com/FahrenheitResearch/goes19
+cargo install --git https://github.com/FahrenheitResearch/goes-abi
 ```
 
 Install the Python package directly from GitHub:
 
 ```powershell
-python -m pip install "git+https://github.com/FahrenheitResearch/goes19"
+python -m pip install "git+https://github.com/FahrenheitResearch/goes-abi"
 ```
 
 From a local checkout:
@@ -51,13 +51,13 @@ python -m maturin develop --features python
 Print supported products and outputs:
 
 ```powershell
-goes19 capabilities
+goes-abi capabilities
 ```
 
 Render the latest GOES-19 CONUS Band 13 native PNG:
 
 ```powershell
-goes19 render `
+goes-abi render `
   --satellite goes19 `
   --sector conus `
   --products goes_abi_band_13 `
@@ -70,7 +70,7 @@ goes19 render `
 Render a full-disk native-resolution infrared frame:
 
 ```powershell
-goes19 render `
+goes-abi render `
   --satellite goes19 `
   --sector full_disk `
   --products goes_abi_band_13 `
@@ -83,7 +83,7 @@ goes19 render `
 Render a regional native crop sequence:
 
 ```powershell
-goes19 native-sequence `
+goes-abi native-sequence `
   --satellite goes19 `
   --sector conus `
   --product geocolor `
@@ -96,7 +96,7 @@ goes19 native-sequence `
 Generate XYZ tiles from local C01/C02/C03 channel files:
 
 ```powershell
-goes19 web-tiles `
+goes-abi web-tiles `
   --channel1 cache\path\to\C01.nc `
   --channel2 cache\path\to\C02.nc `
   --channel3 cache\path\to\C03.nc `
@@ -108,9 +108,9 @@ goes19 web-tiles `
 ## Python Example
 
 ```python
-import goes19
+import goes_abi
 
-report = goes19.render_satellite(
+report = goes_abi.render_satellite(
     satellite="goes19",
     abi_product="ABI-L2-CMIPC",
     abi_sector="conus",
@@ -139,5 +139,5 @@ Every render writes a JSON report next to the PNG/tile output. Reports include s
 cargo fmt --check
 cargo test
 cargo test --features python
-cargo run --bin goes19 -- capabilities
+cargo run --bin goes-abi -- capabilities
 ```
